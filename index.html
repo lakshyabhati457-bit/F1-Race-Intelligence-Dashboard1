@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formula 1 Race Intelligence | Interactive Dashboard</title>
+  <meta name="description" content="Explore Formula 1 race intelligence through an interactive Tableau dashboard and story covering driver performance, team rankings, circuit locations, reliability, tyre compounds, and championship insights.">
+  <meta name="keywords" content="Formula 1, F1, Tableau dashboard, race analytics, driver performance, team championship, data visualization">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    :root { --f1-red:#e10600; --f1-dark:#111217; --f1-panel:#1b1d25; --f1-muted:#bfc1ca; }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
+    body { background:#101116; color:#f7f7f8; font-family:Roboto,Arial,sans-serif; }
+    .header { background:rgba(14,15,19,.96)!important; border-bottom:1px solid #343640; }
+    .sitename { color:#fff!important; font-weight:900!important; letter-spacing:.5px; }
+    .navmenu a, .header .header-social-links a { color:#fff!important; }
+    .navmenu a:hover, .navmenu a.active { color:#ff4a45!important; }
+    .f1-hero { padding:150px 0 70px; background:radial-gradient(ellipse at 90% 10%,rgba(225,6,0,.26),transparent 42%),linear-gradient(135deg,#101116,#191a22 60%,#280e11); border-bottom:3px solid var(--f1-red); }
+    .f1-kicker { color:#ff5c56; font-weight:800; text-transform:uppercase; letter-spacing:3px; font-size:.8rem; }
+    .f1-hero h1 { color:white; font-family:Poppins,sans-serif; font-size:clamp(2.3rem,5vw,4.4rem); line-height:1.1; font-weight:800; margin:15px 0; }
+    .f1-hero h1 span { color:#ff342e; }
+    .f1-hero p { color:#d2d3da; max-width:720px; font-size:1.1rem; }
+    .f1-btn { display:inline-flex; align-items:center; gap:9px; background:var(--f1-red); color:white!important; padding:13px 19px; border-radius:6px; text-decoration:none!important; font-weight:700; margin:10px 10px 0 0; border:1px solid var(--f1-red); }
+    .f1-btn.outline { background:transparent; border-color:#777985; }
+    .f1-btn:hover { background:#b80500; }
+    .f1-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:34px; }
+    .f1-stat { background:rgba(255,255,255,.05); border:1px solid #383a44; border-radius:10px; padding:17px; }
+    .f1-stat strong { display:block; font-size:1.55rem; color:#fff; }
+    .f1-stat span { color:#c3c5ce; font-size:.9rem; }
+    .f1-section { padding:72px 0; background:#101116; color:#f7f7f8; }
+    .f1-section.alt { background:#15161d; }
+    .f1-section h2 { font-family:Poppins,sans-serif; font-weight:800; color:#fff; }
+    .f1-section .lead { color:#c7c9d1; max-width:850px; }
+    .f1-rule { width:64px; height:4px; background:var(--f1-red); margin:14px 0 22px; border-radius:5px; }
+    .f1-card { height:100%; padding:24px; background:var(--f1-panel); border:1px solid #333540; border-radius:12px; }
+    .f1-card .icon { font-size:1.8rem; color:#ff4a45; }
+    .f1-card h3 { color:white; font-size:1.15rem; margin:13px 0 8px; font-weight:700; }
+    .f1-card p { color:#c1c3cc; margin-bottom:0; }
+    .viz-shell { background:white; border-radius:12px; overflow:hidden; border:1px solid #454752; box-shadow:0 16px 40px rgba(0,0,0,.28); }
+    .viz-shell iframe { width:100%; height:760px; border:0; display:block; background:white; }
+    .viz-actions { margin:20px 0 16px; }
+    .f1-note { color:#bfc1ca; font-size:.92rem; margin-top:12px; }
+    .f1-method li { color:#d1d2d9; margin:10px 0; }
+    footer { background:#0b0c10; color:#bfc1ca; padding:30px 0; border-top:1px solid #30313a; }
+    footer strong { color:white; }
+    @media(max-width:767px) { .f1-hero{padding:120px 0 50px;} .f1-section{padding:50px 0;} .viz-shell iframe{height:620px;} }
+  </style>
+</head>
+<body>
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <a href="#home" class="logo d-flex align-items-center me-auto me-xl-0 text-decoration-none"><h1 class="sitename">F1 <span style="color:#e10600">RACE INTELLIGENCE</span></h1></a>
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#story">Story</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="f1-hero">
+    <div class="container" data-aos="fade-up">
+      <div class="f1-kicker">Formula 1 • Data Analytics Project</div>
+      <h1>Turn Race Data Into<br><span>Championship Insights.</span></h1>
+      <p>An interactive Formula 1 analytics experience built with Tableau. Explore driver and team performance, race circuits, reliability, tyre compound usage, and championship patterns through a dashboard and a guided data story.</p>
+      <a class="f1-btn" href="#dashboard"><i class="bi bi-bar-chart-line"></i> Explore Dashboard</a>
+      <a class="f1-btn outline" href="#story"><i class="bi bi-journal-richtext"></i> Read the Story</a>
+      <div class="f1-stats">
+        <div class="f1-stat"><strong>9</strong><span>Visualizations prepared</span></div>
+        <div class="f1-stat"><strong>5</strong><span>Dataset sheets connected</span></div>
+        <div class="f1-stat"><strong>2</strong><span>Interactive Tableau views</span></div>
+        <div class="f1-stat"><strong>360°</strong><span>Race performance exploration</span></div>
+      </div>
+      <p class="f1-note">Project overview figures describe the project setup; chart values and race statistics are shown in the embedded Tableau views.</p>
+    </div>
+  </section>
+
+  <section id="overview" class="f1-section">
+    <div class="container">
+      <div class="f1-kicker">Project Overview</div>
+      <h2>Understand the race behind the results</h2>
+      <div class="f1-rule"></div>
+      <p class="lead">The Formula 1 Race Intelligence Dashboard Analysis Report transforms structured race data into interactive visualizations. The website brings the published Tableau Dashboard and Story together in one place, making it easier to explore the analysis and follow its key findings.</p>
+      <div class="row g-4 mt-2">
+        <div class="col-md-6 col-lg-3"><div class="f1-card"><i class="bi bi-trophy icon"></i><h3>Driver Performance</h3><p>Compare driver points and leaderboard positions to identify leading performers.</p></div></div>
+        <div class="col-md-6 col-lg-3"><div class="f1-card"><i class="bi bi-people icon"></i><h3>Team Rankings</h3><p>Explore team points and compare competitive performance across constructors.</p></div></div>
+        <div class="col-md-6 col-lg-3"><div class="f1-card"><i class="bi bi-geo-alt icon"></i><h3>Circuits & Races</h3><p>Explore circuit locations and race participation across the dataset.</p></div></div>
+        <div class="col-md-6 col-lg-3"><div class="f1-card"><i class="bi bi-wrench-adjustable-circle icon"></i><h3>Reliability & Tyres</h3><p>Review recorded DNFs and tyre-compound usage for race strategy insights.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="f1-section alt">
+    <div class="container">
+      <div class="f1-kicker">Explore the Data</div>
+      <h2>Interactive Tableau Dashboard</h2>
+      <div class="f1-rule"></div>
+      <p class="lead">Explore the dashboard to compare drivers and teams, inspect circuit locations, and review reliability and tyre-related measures. Hover over marks and use the Tableau controls where available to inspect details.</p>
+      <div class="viz-actions"><a class="f1-btn" href="https://public.tableau.com/shared/D3GGP2B5P?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right"></i> Open Dashboard on Tableau Public</a></div>
+      <div class="viz-shell">
+        <iframe title="Formula 1 Race Intelligence Tableau Dashboard" src="https://public.tableau.com/shared/D3GGP2B5P?:showVizHome=no" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <p class="f1-note">If the dashboard does not load in this frame, use the button above to open the published visualization directly on Tableau Public.</p>
+    </div>
+  </section>
+
+  <section id="story" class="f1-section">
+    <div class="container">
+      <div class="f1-kicker">From Charts to Findings</div>
+      <h2>Formula 1 Data Story</h2>
+      <div class="f1-rule"></div>
+      <p class="lead">The Story presents the analysis in a guided sequence, helping viewers move from individual visualizations to a broader understanding of driver performance, team competition, circuit participation, reliability, and tyre usage.</p>
+      <div class="viz-actions"><a class="f1-btn" href="https://public.tableau.com/shared/6QBSBH2QP?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener noreferrer"><i class="bi bi-book"></i> Open Story on Tableau Public</a></div>
+      <div class="viz-shell">
+        <iframe title="Formula 1 Race Intelligence Tableau Story" src="https://public.tableau.com/shared/6QBSBH2QP?:showVizHome=no" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <p class="f1-note">If the Story does not load in this frame, open it directly using the button above.</p>
+    </div>
+  </section>
+
+  <section id="methodology" class="f1-section alt">
+    <div class="container">
+      <div class="f1-kicker">How It Was Built</div>
+      <h2>Methodology & Project Deliverables</h2>
+      <div class="f1-rule"></div>
+      <p class="lead">The project workflow connects the supplied Excel workbook to Tableau, prepares and relates data, creates visualizations, assembles a dashboard and Story, and embeds the published views in a responsive webpage.</p>
+      <div class="f1-card mt-4">
+        <ol class="f1-method">
+          <li><strong>Data connection:</strong> imported the Formula 1 Excel dataset into Tableau and reviewed its five sheets.</li>
+          <li><strong>Data preparation:</strong> checked fields and established the relationship between race results and circuit information where needed.</li>
+          <li><strong>Data visualization:</strong> created nine visualizations for driver performance, team ranking, race locations, reliability, tyre usage, and other race measures.</li>
+          <li><strong>Dashboard design:</strong> arranged the charts into an interactive dashboard for a consolidated view of race intelligence.</li>
+          <li><strong>Storytelling:</strong> created a Tableau Story to present the analysis in a logical narrative.</li>
+          <li><strong>Web integration:</strong> embedded the published Tableau Dashboard and Story into this webpage with direct links as a fallback.</li>
+        </ol>
+      </div>
+      <div class="row g-4 mt-2">
+        <div class="col-md-6"><div class="f1-card"><h3><i class="bi bi-link-45deg icon"></i> Published Dashboard</h3><p>Use the direct Tableau Public link to access the interactive dashboard outside this website.</p><a class="f1-btn" href="https://public.tableau.com/shared/D3GGP2B5P?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener noreferrer">View Dashboard</a></div></div>
+        <div class="col-md-6"><div class="f1-card"><h3><i class="bi bi-journal-check icon"></i> Published Story</h3><p>Open the Tableau Story to follow the project’s sequence of analytical findings.</p><a class="f1-btn" href="https://public.tableau.com/shared/6QBSBH2QP?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener noreferrer">View Story</a></div></div>
+      </div>
+      <p class="f1-note mt-4">Note: Tableau visualizations are hosted by Tableau Public and require an internet connection. This website embeds those published views; it does not store or modify the underlying Tableau data.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container text-center">
+    <strong>Formula 1 Race Intelligence Dashboard Analysis Report</strong>
+    <div class="mt-1">Tableau Public • HTML/CSS • Bootstrap • Web Integration</div>
+    <div class="mt-2 small">Academic project website for data visualization and analysis.</div>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>AOS.init({ duration: 650, once: true });</script>
+</body>
+</html>
