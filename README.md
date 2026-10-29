@@ -1,67 +1,91 @@
-# Formula 1 Race Intelligence Dashboard Analysis Report (2010–2026)
+Formula 1 Race Intelligence Dashboard Analysis Report (2010–2026)
 
-An interactive Formula 1 analysis dashboard built with **Python, Streamlit, Pandas and Plotly**, with a data model suitable for Tableau worksheets and dashboards.
+An interactive Formula 1 data analysis project built using Tableau, Microsoft Excel, HTML, CSS, and GitHub. The project explores race results, driver performance, team rankings, circuit locations, reliability, tyre usage, and championship insights.
 
-## Dashboard modules
-- Driver points leaderboard
-- Constructor points by season
-- Podium distribution by driver and team
-- Grand Prix events by host country/circuit
-- Retirement/status patterns and team-level retirement-rate proxy
-- Filters for season, constructor and driver
-- Data notes that distinguish supported metrics from fields requiring additional sources
+Project Objectives
 
-## Quick start
-Requires Python 3.10+.
+- Analyze Formula 1 racing data.
+- Compare driver and team performance.
+- Identify race participation and reliability patterns.
+- Present insights through interactive Tableau visualizations.
+- Integrate the dashboard and Story into a webpage.
 
-```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
-pip install -r requirements.txt
-python download_data.py
-streamlit run app.py
-```
+Dataset Collection
 
-The app opens locally in your browser. The `data/` directory is intentionally git-ignored to avoid committing a large third-party dataset; the downloader retrieves the public archive when run.
+- Downloaded the provided Formula 1 Excel dataset.
+- Connected the dataset to Tableau.
+- Used five data sheets:
+  - "race_results"
+  - "circuits"
+  - "championship_standings"
+  - "qualifying_results"
+  - "lap_intelligence"
 
-## Data source
-Dataset archive: [TracingInsights/RaceData](https://github.com/TracingInsights/RaceData)  
-Archive URL: https://github.com/TracingInsights/RaceData/releases/latest/download/data.zip
+Data Preparation
 
-Review the upstream repository and its licensing/attribution terms before redistributing data. Do not describe this project as an official Formula 1 product.
+- Connected and reviewed the Excel data.
+- Established a relationship between race results and circuits using Circuit ID.
+- Checked the available fields and dimensions.
+- Prepared the data for visualization and analysis.
 
-## Tableau build
-The CSV files can also be connected in Tableau Desktop/Public:
-1. Connect to `races.csv` and join `results.csv` on `raceId`.
-2. Join `drivers.csv` on `driverId`, `constructors.csv` on `constructorId`, `circuits.csv` on `circuitId`, and `status.csv` on `statusId`.
-3. Filter `year` to 2010–2026.
-4. Build sheets for driver points, constructor points by season, podiums, host country participation, and result status.
-5. Assemble a dashboard and add season/team filters.
-6. Publish through Tableau Public and copy the public workbook URL into your project submission.
+Dashboard Modules
 
-## Publish the interactive demo
-### Streamlit Community Cloud
-1. Push this repository to your GitHub account.
-2. Open https://share.streamlit.io/ and sign in with GitHub.
-3. Deploy this repository, selecting `app.py` as the main file.
-4. The app will download the dataset on first run. If outbound downloads are blocked, commit the required CSVs only after confirming their licence permits redistribution, or modify the app to use an approved hosted data source.
-5. Copy the public app URL to your project workspace.
+- Global Driver Distribution Map
+- Driver Performance Leaderboard
+- Team Performance Ranking
+- Driver Reliability Analysis
+- Team Championship Performance Analysis
+- Tyre Compound Usage Distribution
+- Country-wise Race Participation
+- Podium Achievements by Driver and Team
+- Additional Formula 1 race performance analysis
 
-## GitHub repository
-Create a new public repository named `f1-race-intelligence-dashboard`, upload these files, and paste its URL into the **Add Github Link** field. Do not paste the source dataset's repository as if it were your own project.
+Dashboard
 
-## Important analytical limitations
-- The 2026 season is in progress and will be incomplete.
-- Historical points systems changed, so cross-era point totals are not perfectly comparable without normalization.
-- The provided result-status field supports a retirement/status analysis, but not a reliable engine/brake/collision failure taxonomy.
-- Tyre compound strategy (Soft/Medium/Hard/Intermediate) is not included in this starter dashboard unless compound-level data is available in a validated source. Do not infer tyre compounds from finish positions.
-- The project description mentions 6,464 records; verify this against the downloaded data and the exact table/grain before using it as a factual total.
+The interactive dashboard combines multiple visualizations to help users explore race results, driver points, team performance, circuit locations, and other racing metrics.
 
-## Suggested submission metadata
-**Project:** Formula 1 Race Intelligence Dashboard Analysis Report (2010–2026)  
-**Type:** Individual  
-**Skills:** Data preprocessing, data visualization, dashboard design, Tableau, Python  
-**Status:** Dashboard source prepared; publish demo and GitHub links after deployment.
+"Open Tableau Dashboard" (https://public.tableau.com/shared/D3GGP2B5P?:display_count=n&:origin=viz_share_link)
+
+Tableau Story
+
+The Story presents the analysis in a sequence of scenes, highlighting overall race insights, driver performance, team comparisons, tyre usage, participation, and podium achievements.
+
+"Open Tableau Story" (https://public.tableau.com/shared/6QBSBH2QP?:display_count=n&:origin=viz_share_link)
+
+Performance Testing
+
+- Checked charts for correct data representation.
+- Tested dashboard filters and interactions.
+- Reviewed dashboard responsiveness.
+- Verified that the visualizations loaded correctly.
+- Total dataset sheets: 5.
+- Total visualizations: 9.
+
+Web Integration
+
+- Published the Dashboard and Story on Tableau Public.
+- Integrated both Tableau views into a webpage.
+- Added separate Dashboard and Story sections.
+- Included direct links to the published visualizations.
+- Used HTML and CSS for the website interface.
+
+Technologies Used
+
+- Tableau Public
+- Microsoft Excel
+- HTML
+- CSS
+- GitHub
+- Python Flask (for the Flask-based version, if used)
+
+Project Demonstration
+
+The demonstration video explains dataset collection, data preparation, visualization, dashboard development, Story creation, performance testing, and web integration.
+
+Conclusion
+
+This project demonstrates how Formula 1 racing data can be transformed into meaningful insights through data visualization and interactive storytelling. The integrated webpage makes the Dashboard and Story easier to access and explore.
+
+Author
+
+Lakshya Bhati
