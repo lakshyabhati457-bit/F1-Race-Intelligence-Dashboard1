@@ -1,35 +1,31 @@
-Formula 1 Race Intelligence Dashboard Analysis Report (2010–2026)
+# Formula 1 Race Intelligence Dashboard Analysis Report (2010–2026)
 
-An interactive Formula 1 data analysis project built using Tableau, Microsoft Excel, HTML, CSS, and GitHub. The project explores race results, driver performance, team rankings, circuit locations, reliability, tyre usage, and championship insights.
+An interactive Formula 1 data analysis project built using **Tableau, Microsoft Excel, HTML, CSS, and GitHub**. This project explores race results, driver performance, team rankings, circuit locations, reliability, tyre usage, and championship insights.
 
-Project Objectives
-
+## Project Objectives
 - Analyze Formula 1 racing data.
 - Compare driver and team performance.
 - Identify race participation and reliability patterns.
 - Present insights through interactive Tableau visualizations.
 - Integrate the dashboard and Story into a webpage.
 
-Dataset Collection
-
+## Dataset Collection
 - Downloaded the provided Formula 1 Excel dataset.
 - Connected the dataset to Tableau.
 - Used five data sheets:
-  - "race_results"
-  - "circuits"
-  - "championship_standings"
-  - "qualifying_results"
-  - "lap_intelligence"
+  - `race_results`
+  - `circuits`
+  - `championship_standings`
+  - `qualifying_results`
+  - `lap_intelligence`
 
-Data Preparation
-
-- Connected and reviewed the Excel data.
+## Data Preparation
+- Connected and reviewed the Excel dataset.
 - Established a relationship between race results and circuits using Circuit ID.
-- Checked the available fields and dimensions.
+- Checked available fields and data structure.
 - Prepared the data for visualization and analysis.
 
-Dashboard Modules
-
+## Dashboard Modules
 - Global Driver Distribution Map
 - Driver Performance Leaderboard
 - Team Performance Ranking
@@ -40,52 +36,42 @@ Dashboard Modules
 - Podium Achievements by Driver and Team
 - Additional Formula 1 race performance analysis
 
-Dashboard
+## Dashboard
+The interactive dashboard helps users explore driver points, team performance, circuit locations, race results, and other racing metrics.
 
-The interactive dashboard combines multiple visualizations to help users explore race results, driver points, team performance, circuit locations, and other racing metrics.
+[Open Tableau Dashboard](https://public.tableau.com/shared/D3GGP2B5P?:display_count=n&:origin=viz_share_link)
 
-"Open Tableau Dashboard" (https://public.tableau.com/shared/D3GGP2B5P?:display_count=n&:origin=viz_share_link)
+## Tableau Story
+The Story presents the analysis through multiple scenes, highlighting race insights, driver performance, team comparisons, tyre usage, participation, and podium achievements.
 
-Tableau Story
+[Open Tableau Story](https://public.tableau.com/shared/6QBSBH2QP?:display_count=n&:origin=viz_share_link)
 
-The Story presents the analysis in a sequence of scenes, highlighting overall race insights, driver performance, team comparisons, tyre usage, participation, and podium achievements.
-
-"Open Tableau Story" (https://public.tableau.com/shared/6QBSBH2QP?:display_count=n&:origin=viz_share_link)
-
-Performance Testing
-
+## Performance Testing
 - Checked charts for correct data representation.
 - Tested dashboard filters and interactions.
 - Reviewed dashboard responsiveness.
-- Verified that the visualizations loaded correctly.
+- Verified that visualizations loaded correctly.
 - Total dataset sheets: 5.
 - Total visualizations: 9.
 
-Web Integration
-
+## Web Integration
 - Published the Dashboard and Story on Tableau Public.
 - Integrated both Tableau views into a webpage.
 - Added separate Dashboard and Story sections.
 - Included direct links to the published visualizations.
-- Used HTML and CSS for the website interface.
 
-Technologies Used
-
+## Technologies Used
 - Tableau Public
 - Microsoft Excel
 - HTML
 - CSS
 - GitHub
-- Python Flask (for the Flask-based version, if used)
 
-Project Demonstration
+## Project Demonstration
+The demonstration video covers dataset collection, data preparation, visualization, dashboard development, Story creation, performance testing, and web integration.
 
-The demonstration video explains dataset collection, data preparation, visualization, dashboard development, Story creation, performance testing, and web integration.
+## Conclusion
+This project demonstrates how Formula 1 racing data can be transformed into meaningful insights through data visualization and interactive storytelling.
 
-Conclusion
-
-This project demonstrates how Formula 1 racing data can be transformed into meaningful insights through data visualization and interactive storytelling. The integrated webpage makes the Dashboard and Story easier to access and explore.
-
-Author
-
-Lakshya Bhati
+## Author
+**Lakshya Bhati**
